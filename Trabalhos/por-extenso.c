@@ -3,13 +3,15 @@
 int main(){
 
     double valorTotal;
-    int contadorMilhar = 0, contadorCentena = 0, contadorDezena = 0, contadorUnidade = 0, contadorDecimo = 0, contadorCentezimo = 0;
+    int contadorMilhar = 0, contadorCentena = 0, contadorDezena = 0, contadorUnidade = 0, contadorDecimo = 0, contadorCentesimo = 0;
     char milhar[99], dezena[99], centena[99], unidade[99], decimo[99], centezimo[99];
 
     printf("Informe o valor numerico em reais ate R$9999.99: \n");
     scanf("%lf", &valorTotal);
     if(valorTotal > 9999.99){
         printf("Valor maximo ultrapassado");
+        // system ("pause");
+        // pause para executar como .exe
         return 0;
     }
     while(valorTotal >= 1000.00){
@@ -34,15 +36,17 @@ int main(){
     }
     while (valorTotal >= 0.009){
         valorTotal = valorTotal - 0.01;
-        contadorCentezimo++;   
+        contadorCentesimo++;   
     }
 
-    if(contadorCentezimo == 10){
+    if(contadorCentesimo == 10){
         contadorDecimo++;
-        contadorCentezimo = 0;
+        contadorCentesimo = 0;
     }
-    // printf("%d %d %d %d %d %d\n", contadorMilhar, contadorCentena, contadorDezena, contadorUnidade, contadorDecimo, contadorCentezimo);
+
+    // printf("%d %d %d %d %d %d\n", contadorMilhar, contadorCentena, contadorDezena, contadorUnidade, contadorDecimo, contadorCentesimo);
     // debuggador dos contadores
+
     switch(contadorMilhar){
     case 9:
         strcpy(milhar, "nove mil");
@@ -95,7 +99,7 @@ int main(){
         strcpy(centena, "quatrocentos");
         break;
     case 3:
-        strcpy(centena, "trezecentos");
+        strcpy(centena, "trezentos");
         break;
     case 2:
         strcpy(centena, "duzentos");
@@ -104,13 +108,14 @@ int main(){
         if(contadorDezena != 0 || contadorUnidade != 0){
             strcpy(centena, "cento");
             break;
-        }else{
-            strcpy(centena, "cem");
-        break;
+        }   else{
+                strcpy(centena, "cem");
+                break;
         }           
     default:
         break;
     }
+
     switch(contadorDezena){
     case 9:
         strcpy(dezena, "noventa");
@@ -214,7 +219,8 @@ int main(){
         break;    
     default:
         break;
-    } 
+    }
+
     }
     switch(contadorDecimo){
     case 9:
@@ -243,53 +249,54 @@ int main(){
         break; 
     case 1:
 
-        switch(contadorCentezimo){
+        switch(contadorCentesimo){
         case 9:
             strcpy(decimo, "dezenove");
-            contadorCentezimo = 0;
+            contadorCentesimo = 0;
             break;
         case 8:
             strcpy(decimo, "dezoito");
-            contadorCentezimo = 0;
+            contadorCentesimo = 0;
             break;
         case 7:
             strcpy(decimo, "dezessete");
-            contadorCentezimo = 0;
+            contadorCentesimo = 0;
             break;
         case 6:
             strcpy(decimo, "dezesseis");
-            contadorCentezimo = 0;
+            contadorCentesimo = 0;
             break;
         case 5:
             strcpy(decimo, "quinze");
-            contadorCentezimo = 0;
+            contadorCentesimo = 0;
             break;
         case 4:
             strcpy(decimo, "catorze");
-            contadorCentezimo = 0;
+            contadorCentesimo = 0;
             break;
         case 3:
             strcpy(decimo, "treze");
-            contadorCentezimo = 0;
+            contadorCentesimo = 0;
             break;
         case 2:
             strcpy(decimo, "doze");
-            contadorCentezimo = 0;
+            contadorCentesimo = 0;
             break; 
         case 1:
             strcpy(decimo, "onze");
-            contadorCentezimo = 0;
+            contadorCentesimo = 0;
             break;    
         default:
             strcpy(decimo, "dez");
-            contadorCentezimo = 0;
+            contadorCentesimo = 0;
             break;
         }    
     default:
         break;
     }
+
     if(contadorDecimo != 1){
-       switch(contadorCentezimo){
+       switch(contadorCentesimo){
     case 9:
         strcpy(centezimo, "nove");
         break;
@@ -320,44 +327,57 @@ int main(){
     default:
         break;
     } 
+
     }
     if(contadorMilhar != 0){
     printf("%s ", milhar);
     }
+
     if(contadorCentena != 0 && contadorMilhar != 0){
     printf("e %s ", centena);
     }
+
     if(contadorCentena != 0 && contadorMilhar == 0){
     printf("%s ", centena);
     }
+
     if((contadorDezena !=0 && contadorMilhar != 0) || (contadorDezena != 0 && contadorMilhar != 0)){
     printf("e %s ", dezena);    
     }
+
     if((contadorDezena !=0 && contadorMilhar == 0) && (contadorDezena != 0 && contadorMilhar == 0)){
     printf("%s ", dezena);    
     }
+
     if((contadorUnidade !=0 && contadorMilhar != 0) || (contadorUnidade != 0 && contadorCentena != 0) || (contadorUnidade != 0 && contadorDezena != 0)){
     printf("e %s ", unidade);     
     }
+
     if((contadorUnidade !=0 && contadorMilhar == 0) && (contadorUnidade != 0 && contadorCentena == 0) && (contadorUnidade != 0 && contadorDezena == 0)){
     printf("%s ", unidade);     
     }
+
     if(contadorMilhar != 0 || contadorCentena != 0 || contadorDezena != 0 || contadorUnidade != 0){
     printf("reais ");
     }
+
     if((contadorDecimo != 0 && contadorMilhar != 0) || (contadorDecimo != 0 && contadorCentena != 0) || (contadorDecimo != 0 && contadorDezena != 0) || (contadorDecimo != 0 && contadorUnidade != 0)){
     printf("e %s ", decimo);
     } 
+
     if((contadorDecimo != 0 && contadorMilhar == 0) && (contadorDecimo != 0 && contadorCentena == 0) && (contadorDecimo != 0 && contadorDezena == 0) && (contadorDecimo != 0 && contadorUnidade == 0)){
     printf("%s ", decimo);
     }
-    if((contadorCentezimo != 0 && contadorMilhar != 0) || (contadorCentezimo != 0 && contadorCentena != 0) || (contadorCentezimo != 0 && contadorDezena != 0) || (contadorCentezimo != 0 && contadorUnidade != 0) || (contadorCentezimo != 0 && contadorDecimo != 0)){
+    
+    if((contadorCentesimo != 0 && contadorMilhar != 0) || (contadorCentesimo != 0 && contadorCentena != 0) || (contadorCentesimo != 0 && contadorDezena != 0) || (contadorCentesimo != 0 && contadorUnidade != 0) || (contadorCentesimo != 0 && contadorDecimo != 0)){
     printf("e %s ", centezimo);    
     }
-    if((contadorCentezimo != 0 && contadorMilhar == 0) && (contadorCentezimo != 0 && contadorCentena == 0) && (contadorCentezimo != 0 && contadorDezena == 0) && (contadorCentezimo != 0 && contadorUnidade == 0) && (contadorCentezimo != 0 && contadorDecimo == 0)){
+
+    if((contadorCentesimo != 0 && contadorMilhar == 0) && (contadorCentesimo != 0 && contadorCentena == 0) && (contadorCentesimo != 0 && contadorDezena == 0) && (contadorCentesimo != 0 && contadorUnidade == 0) && (contadorCentesimo != 0 && contadorDecimo == 0)){
     printf("%s ", centezimo);
     }
-    if(contadorDecimo != 0 || contadorCentezimo != 0){
+
+    if(contadorDecimo != 0 || contadorCentesimo != 0){
     printf("centavos\n");
     }    
 
