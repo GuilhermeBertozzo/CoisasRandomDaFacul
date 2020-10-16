@@ -4,18 +4,20 @@
 #include <windows.h>
 #include <time.h>
 
-void BuildField(char Field[20][31]);
-int RandMove(char Field[20][31], int Px[5], int Py[5], char snake[5]);
+
+// Prototipacao das funcoes
+void BuildField(char Field[20][31]); // Constroi o "tabuleiro"
+int RandMove(char Field[20][31], int Px[5], int Py[5], char snake[5]); // Randomiza e realiza os movimentos
 
 int main(){
 
-    srand(time(NULL));
+    srand(time(NULL)); // Randomizacao dos passos da cobrinhas
 
-    int Px[5] = {1, 1, 1, 1, 1}, Py[5] = {1, 2, 3, 4, 5};
+    int Px[5] = {1, 1, 1, 1, 1}, Py[5] = {1, 2, 3, 4, 5}; // Posicionais do corpo da cobrinha
 
-    char snake[5] = {176, 177, 177, 177, 178};
+    char snake[5] = {176, 177, 177, 177, 178}; // Icones da cobrinha
 
-    char Field[20][31];
+    char Field[20][31]; // Campo de jogo
 
     BuildField(Field);
 
@@ -25,9 +27,9 @@ int main(){
         Field[Px[i]][Py[i]] = snake[i];
     }
 
-    while (!kbhit()){
+    while (!kbhit()){ // kbhit checa pressionamentos de teclas
 
-        system("cls");
+        system("cls"); // limpa a tela para o proximo movimento
 
         for (i = 0; i < 20; i++){
             for (j = 0; j < 30; j++){
@@ -35,7 +37,7 @@ int main(){
                     printf("  ");
                 }
                 else{
-                    printf("%c ", Field[i][j]);
+                    printf("%c ", Field[i][j]); // imprime o campo
                 }
             }
             printf("\n");
@@ -52,17 +54,17 @@ int main(){
 }
 
 void BuildField(char Field[20][31]){
-    FILE *FileName = fopen("obstaculos.txt", "r");
+    FILE *FileName = fopen("obstaculos.txt", "r"); // Abre o arquivo com os obstaculos
     if (FileName == NULL){
         return;
     }
     int i, j;
     for (i = 0; i < 20; i++){
         for (j = 0; j < 31; j++){
-            fscanf(FileName, "%c", &Field[i][j]);
+            fscanf(FileName, "%c", &Field[i][j]); // Le o arquivo com os obstaculos
         }
     }
-    fclose(FileName);
+    fclose(FileName);// Fecha o arquivo
 }
 
 int RandMove(char Field[20][31], int Px[5], int Py[5], char snake[5]){
@@ -75,7 +77,15 @@ int RandMove(char Field[20][31], int Px[5], int Py[5], char snake[5]){
         Py[i] = Py[i + 1];
     }
     int valid = 0;
-    int count = 0;
+    int count = 0; // Contador para saber se a cobrinha esta presa
+
+    // Visualizacao do switch em relacao aos movimento possiveis. C corresponde a cabeca da cobrinha
+    // 0 1 2
+    // 3 C 4
+    // 5 6 7
+
+
+
     while (!valid && count < 1000 ){
         int r = rand() % 8;
         switch (r){
